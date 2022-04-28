@@ -5,18 +5,18 @@ import { Container } from './styles';
 
 import Card from '../Card';
 
-function List() {
-  return (<Container>
+function List({data}) {
+  return (<Container done={data.done}>
       <header>
-          <h2>Tarefas</h2>
-          <button type='button'><MdAdd size={24} color="#FFF"></MdAdd></button>
+          <h2>{data.title}</h2>
+          {data.creatable && (
+                <button type='button'>
+                  <MdAdd size={24} color="#FFF"/>
+                </button>
+          )}
       </header>
       <ul>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          {data.cards.map((card, index) => <Card key={card.id} index={index} data={card}/>)}
       </ul>
 
   </Container>);
