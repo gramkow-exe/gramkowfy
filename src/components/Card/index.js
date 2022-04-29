@@ -9,7 +9,7 @@ function Card({data, index, listIndex}) {
 
     const [{isDragging}, dragRef] = useDrag({
         type: 'CARD',
-        item: {index, listindex},
+        item: {index, listIndex},
         collect: monitor => ({
             isDragging: monitor.isDragging()
         })
@@ -19,12 +19,13 @@ const [, dropRef] = useDrop({
     accept: "CARD",
     hover(item, monitor){
         const draggedListIndex = item.listIndex
-        // const targetListIndex = listIndex;
+        const targetListIndex = listIndex;
 
         const draggedIndex = item.index;
         const targetindex = index;
+        
 
-        if (draggedIndex === targetindex){
+        if (draggedIndex === targetindex && draggedListIndex === targetListIndex){
             return;
         }
 
@@ -42,7 +43,10 @@ const [, dropRef] = useDrop({
             return;
         }
 
-        move(draggedListIndex, draggedIndex, targetindex)
+        move(draggedListIndex, targetListIndex, draggedIndex, targetindex)
+    
+        item.index = targetindex;
+        item.listIndex = targetListIndex;
     }
 })
 
