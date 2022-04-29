@@ -17,6 +17,7 @@ function List({data, index: listIndex}) {
       </header>
       <ul>
           {data.cards.map((card, index) => <Card key={card.id} listIndex={listIndex} index={index} data={card}/>)}
+          {/* Map que retorna os cards a serem criados */}
       </ul>
 
   </Container>);
